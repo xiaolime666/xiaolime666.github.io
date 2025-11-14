@@ -14,7 +14,6 @@
       --bg-2: #0b1120;
       --accent: #38bdf8;
       --accent-2: #a855f7;
-      --accent-soft: rgba(56,189,248,0.35);
       --text-main: #e5e7eb;
       --text-muted: #9ca3af;
       --glass-bg: rgba(15,23,42,0.72);
@@ -24,18 +23,17 @@
     }
 
     body {
+      font-family: "Noto Sans TC", sans-serif;
       min-height: 100vh;
-      color: var(--text-main);
       background:
         radial-gradient(circle at top left, rgba(56,189,248,0.25), transparent 55%),
         radial-gradient(circle at bottom right, rgba(168,85,247,0.25), transparent 55%),
         linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      color: var(--text-main);
       background-attachment: fixed;
-      overflow-x: hidden;
-      font-family: "Noto Sans TC", sans-serif;
     }
 
-    /* Spotify Player CSS */
+    /* ─────────────── Spotify Player ─────────────── */
     .spotify-player {
       position: fixed;
       left: 20px;
@@ -50,136 +48,71 @@
       z-index: 999;
     }
 
-    .sp-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    .sp-header { display:flex; gap:12px; align-items:center; }
+    .sp-cover { width:58px; height:58px; border-radius:12px; overflow:hidden; }
+    .sp-cover img { width:100%; height:100%; object-fit:cover; }
 
-    .sp-cover {
-      width: 58px;
-      height: 58px;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 0 18px rgba(56,189,248,0.35);
-    }
-
-    .sp-cover img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .sp-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #e5e7eb;
-    }
-
-    .sp-sub {
-      font-size: 11px;
-      color: #9ca3af;
-    }
+    .sp-title { font-size:14px; font-weight:700; }
+    .sp-sub { font-size:11px; color:#9ca3af; }
 
     .sp-controls {
-      margin-top: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 18px;
+      margin-top:14px;
+      display:flex;
+      justify-content:center;
+      gap:20px;
     }
 
     .sp-btn {
-      font-size: 20px;
-      color: #e5e7eb;
-      cursor: pointer;
-      transition: transform .15s ease;
+      font-size:20px;
+      cursor:pointer;
+      transition:0.15s ease;
     }
+    .sp-btn:hover { transform:scale(1.2); }
 
-    .sp-btn:hover {
-      transform: scale(1.15);
-    }
+    .sp-bar { width:100%; height:4px; background:#ffffff30; border-radius:999px; margin-top:10px; }
+    .sp-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,#38bdf8,#a855f7); border-radius:999px; }
 
-    .sp-bar {
-      width: 100%;
-      height: 4px;
-      background: rgba(255,255,255,0.15);
-      border-radius: 999px;
-      margin-top: 12px;
-      overflow: hidden;
-    }
-
-    .sp-bar-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #38bdf8, #a855f7);
-      border-radius: 999px;
-    }
-
-    .vis-bars {
-      display: flex;
-      gap: 3px;
-      margin-top: 12px;
-      height: 18px;
-    }
-
+    .vis-bars { display:flex; gap:3px; margin-top:10px; height:18px; }
     .vis-bar {
-      flex: 1;
-      background: linear-gradient(180deg, #38bdf8, #a855f7);
-      border-radius: 6px;
-      transform-origin: bottom;
-      opacity: .75;
+      flex:1;
+      background:linear-gradient(180deg,#38bdf8,#a855f7);
+      border-radius:6px;
+      transform-origin:bottom;
+      opacity:.7;
     }
 
-    /* Right bottom circular photo */
+    /* ─────────────── 浮動頭像 ─────────────── */
     .photo-box {
       position: fixed;
-      right: 18px;
-      bottom: 18px;
+      right: 20px;
+      bottom: 20px;
       width: 120px;
       height: 120px;
-      border-radius: 999px;
+      border-radius:999px;
       background:
-        linear-gradient(#020617, #020617) padding-box,
-        conic-gradient(from 210deg, var(--accent), var(--accent-2), var(--accent)) border-box;
-      border: 3px solid transparent;
-      overflow: hidden;
-      box-shadow: 0 20px 50px rgba(15,23,42,0.95);
-      animation: float-soft 6s ease-in-out infinite;
-      z-index: 900;
+        linear-gradient(#020617,#020617) padding-box,
+        conic-gradient(from 210deg,#38bdf8,#a855f7,#38bdf8) border-box;
+      border:3px solid transparent;
+      overflow:hidden;
+      box-shadow:0 20px 55px rgba(0,0,0,0.7);
+      animation: float 6s ease-in-out infinite;
     }
 
-    .photo-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: .96;
-      transition: .25s ease;
+    @keyframes float {
+      0% { transform:translateY(0); }
+      50%{ transform:translateY(-8px); }
+      100%{ transform:translateY(0); }
     }
 
-    .photo-box:hover img {
-      transform: scale(1.07);
-      opacity: 1;
-    }
-
-    @keyframes float-soft {
-      0%   { transform: translateY(0); }
-      50%  { transform: translateY(-6px); }
-      100% { transform: translateY(0); }
-    }
-
+    .photo-box img{ width:100%; height:100%; object-fit:cover; opacity:.95; }
   </style>
 </head>
-
 <body>
 
-  <!-- ░░░ Spotify 風格播放器 ░░░ -->
+  <!-- Spotify 風播放器 -->
   <div class="spotify-player">
-    
     <div class="sp-header">
-      <div class="sp-cover">
-        <img src="1713.png">
-      </div>
+      <div class="sp-cover"><img src="1713.png"></div>
       <div>
         <div class="sp-title">背景音樂</div>
         <div class="sp-sub">Auto BGM</div>
@@ -191,109 +124,163 @@
       <div class="sp-btn" id="spPause">⏸</div>
     </div>
 
-    <div class="sp-bar">
-      <div class="sp-bar-fill" id="spBarFill"></div>
-    </div>
-
-    <!-- 音樂律動光效 -->
+    <div class="sp-bar"><div class="sp-bar-fill" id="spBarFill"></div></div>
     <div class="vis-bars" id="visBars"></div>
 
     <audio id="bgm" loop>
       <source src="1712.mp3" type="audio/mpeg">
     </audio>
-
   </div>
 
-  <!-- ░░░ 右下圓形霓虹頭像 ░░░ -->
+  <!-- 右下霓虹頭像 -->
   <div class="photo-box">
-    <img src="1713.png" alt="Me">
+    <img src="1713.png">
   </div>
 
-  <!-- ░░░ Spotify Player Script ░░░ -->
-  <script>
-    const audio = document.getElementById("bgm");
-    const spPlay = document.getElementById("spPlay");
-    const spPause = document.getElementById("spPause");
-    const spBarFill = document.getElementById("spBarFill");
-    const visBars = document.getElementById("visBars");
+  <!-- ─────────────── 你的網站主內容（保持不變） ─────────────── -->
+  <div class="page-shell">
 
-    /* -------- 建立 12 根光柱 -------- */
-    for (let i = 0; i < 12; i++) {
-      const bar = document.createElement("div");
-      bar.classList.add("vis-bar");
-      visBars.appendChild(bar);
-    }
+    <header>
+      <div class="logo">LI JIA AN</div>
+      <nav>
+        <a href="#about">關於我</a>
+        <a href="#skills">技能</a>
+        <a href="#works">作品</a>
+      </nav>
+    </header>
 
-    /* -------- 建立 Web Audio API -------- */
-    const AudioCtx = window.AudioContext || window.webkitAudioContext;
-    const ctx = new AudioCtx();
-    const src = ctx.createMediaElementSource(audio);
-    const analyser = ctx.createAnalyser();
+    <section class="hero">
+      <div class="glass-card hero-main">
+        <div class="hero-title">嗨，我是 <span>李家安</span></div>
+        <p class="hero-sub">人生短短幾個秋，先睡飽再說。</p>
+        <div class="hero-tags">
+          <div class="tag">吃飯</div>
+          <div class="tag">睡覺</div>
+          <div class="tag">打手槍</div>
+        </div>
+      </div>
+    </section>
 
-    analyser.fftSize = 64;
-    const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
+    <section id="about">
+      <h2>關於我</h2>
+      <p class="section-sub">一點點文字介紹。</p>
+      <div class="about-box">
+        我是李家安，喜歡吃飯、睡覺、耍廢。
+      </div>
+    </section>
 
-    src.connect(analyser);
-    analyser.connect(ctx.destination);
+    <section id="skills">
+      <h2>技能專長</h2>
+      <p class="section-sub">每天都在耍廢，但耍廢得很專業。</p>
 
-    /* -------- 淡入效果 -------- */
-    audio.volume = 0;
-    function fadeIn() {
-      let vol = 0;
-      const timer = setInterval(() => {
-        vol += 0.02;
-        audio.volume = vol;
-        if (vol >= 1) clearInterval(timer);
-      }, 60);
-    }
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>吃飽睡 / 睡飽吃</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">7777</span>
+            <span class="skill-tag">作息調整</span>
+            <span class="skill-tag">快樂生活</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    /* -------- 播放 / 暫停按鈕 -------- */
-    spPlay.onclick = () => {
-      audio.play();
-      fadeIn();
-    };
+    <section id="works">
+      <h2>作品 / 經歷</h2>
 
-    spPause.onclick = () => {
-      audio.pause();
-    };
+      <div class="cards">
+        <div class="card">
+          <div class="card-title">睡眠研究</div>
+          <div class="card-meta">2020 - 至今</div>
+          <p>睡得很爽。</p>
+        </div>
+      </div>
+    </section>
 
-    /* -------- 進度條 -------- */
-    audio.ontimeupdate = () => {
-      if (!audio.duration) return;
-      spBarFill.style.width = (audio.currentTime / audio.duration) * 100 + "%";
-    };
+    <footer>© 2025 LI JIA AN</footer>
 
-    /* -------- 音樂律動動畫 -------- */
-    function animate() {
-      requestAnimationFrame(animate);
-      analyser.getByteFrequencyData(dataArray);
-      const bars = document.querySelectorAll(".vis-bar");
+  </div>
+<script>
+  const audio = document.getElementById("bgm");
+  const spPlay = document.getElementById("spPlay");
+  const spPause = document.getElementById("spPause");
+  const spBarFill = document.getElementById("spBarFill");
+  const visBars = document.getElementById("visBars");
 
-      bars.forEach((bar, i) => {
-        const v = dataArray[i] / 255;
-        const h = 6 + v * 18;
-        bar.style.transform = `scaleY(${h})`;
-        bar.style.opacity = 0.5 + v * 0.5;
-      });
-    }
-    animate();
+  /* 建立 12 根光柱 */
+  for (let i = 0; i < 12; i++) {
+    const bar = document.createElement("div");
+    bar.classList.add("vis-bar");
+    visBars.appendChild(bar);
+  }
 
-    /* -------- A+B 自動播放策略 -------- */
-    audio.muted = true;
+  /* Web Audio API */
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  const ctx = new AudioCtx();
+  const src = ctx.createMediaElementSource(audio);
+  const analyser = ctx.createAnalyser();
+
+  analyser.fftSize = 64;
+  const bufferLength = analyser.frequencyBinCount;
+  const dataArray = new Uint8Array(bufferLength);
+
+  src.connect(analyser);
+  analyser.connect(ctx.destination);
+
+  /* 淡入 */
+  audio.volume = 0;
+  function fadeIn() {
+    let v = 0;
+    const timer = setInterval(() => {
+      v += 0.02;
+      audio.volume = v;
+      if (v >= 1) clearInterval(timer);
+    }, 60);
+  }
+
+  /* 控制 */
+  spPlay.onclick = () => {
+    audio.play();
+    fadeIn();
+  };
+  spPause.onclick = () => audio.pause();
+
+  /* 進度條 */
+  audio.ontimeupdate = () => {
+    if (!audio.duration) return;
+    spBarFill.style.width = (audio.currentTime / audio.duration) * 100 + "%";
+  };
+
+  /* 音樂律動 */
+  function animateBars() {
+    requestAnimationFrame(animateBars);
+    analyser.getByteFrequencyData(dataArray);
+
+    const bars = document.querySelectorAll(".vis-bar");
+    bars.forEach((bar, i) => {
+      const val = dataArray[i] / 255;
+      const h = 6 + val * 18;
+      bar.style.transform = `scaleY(${h})`;
+      bar.style.opacity = 0.5 + val * 0.5;
+    });
+  }
+  animateBars();
+
+  /* 自動播放策略 */
+  audio.muted = true;
+  audio.play().catch(()=>{});
+
+  function unlock() {
+    audio.muted = false;
     audio.play().catch(()=>{});
+    fadeIn();
+    window.removeEventListener("click", unlock);
+    window.removeEventListener("touchstart", unlock);
+  }
 
-    function unlock() {
-      audio.muted = false;
-      audio.play().catch(()=>{});
-      fadeIn();
-      window.removeEventListener("click", unlock);
-      window.removeEventListener("touchstart", unlock);
-    }
-
-    window.addEventListener("click", unlock);
-    window.addEventListener("touchstart", unlock);
-  </script>
+  window.addEventListener("click", unlock);
+  window.addEventListener("touchstart", unlock);
+</script>
 
 </body>
 </html>
