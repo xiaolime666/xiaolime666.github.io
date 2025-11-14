@@ -2,79 +2,179 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <title>你的名字｜個人介紹</title>
+  <title>李家安｜個人介紹</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+      --bg-1: #0f172a;
+      --bg-2: #020617;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.25);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --glass-bg: rgba(15, 23, 42, 0.65);
+      --glass-border: rgba(148, 163, 184, 0.5);
+      --radius-lg: 18px;
+      --shadow-glass: 0 18px 45px rgba(15, 23, 42, 0.7);
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "Segoe UI", sans-serif;
+      font-family: "Noto Sans TC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     body {
-      background: #ffffff;
-      color: #222;
-      line-height: 1.6;
+      min-height: 100vh;
+      color: var(--text-main);
+      line-height: 1.7;
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,0.28), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(59,130,246,0.25), transparent 55%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      background-attachment: fixed;
     }
 
     a {
-      color: #222;
+      color: inherit;
       text-decoration: none;
     }
 
+    /* 動畫 */
+    @keyframes fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float-soft {
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-6px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes glow-soft {
+      0%   { box-shadow: 0 0 0 rgba(56,189,248,0.0); }
+      50%  { box-shadow: 0 0 22px rgba(56,189,248,0.45); }
+      100% { box-shadow: 0 0 0 rgba(56,189,248,0.0); }
+    }
+
+    .fade-in {
+      animation: fade-in-up 0.8s ease-out both;
+    }
+
+    .fade-in-delay-1 { animation-delay: 0.12s; }
+    .fade-in-delay-2 { animation-delay: 0.22s; }
+    .fade-in-delay-3 { animation-delay: 0.34s; }
+
     /* 主要版面 */
-    .container {
-      max-width: 1100px;
+    .page-shell {
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 24px 16px 80px;
+      padding: 24px 16px 96px;
+    }
+
+    .glass-card {
+      background: var(--glass-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-glass);
+      backdrop-filter: blur(18px);
     }
 
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 0;
-      border-bottom: 1px solid #ddd;
-      margin-bottom: 32px;
+      padding: 14px 20px;
+      margin-bottom: 28px;
+      position: sticky;
+      top: 16px;
+      z-index: 20;
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.22), transparent 60%);
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 12px 40px rgba(15,23,42,0.85);
+      animation: fade-in-up 0.75s ease-out both;
     }
 
     .logo {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
     }
 
     nav a {
       margin-left: 20px;
-      font-size: 15px;
-      opacity: 0.7;
+      font-size: 14px;
+      color: var(--text-muted);
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 2px;
+      width: 0;
+      background: linear-gradient(90deg, var(--accent), #4f46e5);
+      transition: width 0.22s ease;
+      border-radius: 999px;
     }
 
     nav a:hover {
-      opacity: 1;
+      color: var(--text-main);
+    }
+
+    nav a:hover::after {
+      width: 100%;
     }
 
     /* Hero 區塊 */
     .hero {
       display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1.3fr);
-      gap: 32px;
+      grid-template-columns: minmax(0, 1.9fr) minmax(0, 1.3fr);
+      gap: 28px;
       align-items: center;
-      padding: 32px 0;
+      margin-top: 18px;
+    }
+
+    .hero-main {
+      padding: 22px 22px 26px;
     }
 
     .hero-title {
-      font-size: 40px;
-      font-weight: 800;
-      color: #000;
+      font-size: 36px;
+      font-weight: 900;
       margin-bottom: 10px;
     }
 
+    .hero-title span {
+      color: var(--accent);
+      text-shadow: 0 0 20px rgba(56,189,248,0.7);
+    }
+
     .hero-sub {
-      font-size: 16px;
-      opacity: 0.75;
-      margin-bottom: 20px;
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
     }
 
     .hero-tags {
@@ -87,91 +187,188 @@
     .tag {
       padding: 5px 12px;
       border-radius: 999px;
-      background: #f4f4f4;
-      border: 1px solid #ddd;
+      background: rgba(15,23,42,0.85);
+      border: 1px solid rgba(148,163,184,0.6);
       font-size: 12px;
+      color: #e5e7eb;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn-main,
+    .btn-ghost {
+      padding: 9px 18px;
+      font-size: 14px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border 0.15s ease;
     }
 
     .btn-main {
-      padding: 10px 18px;
-      background: #000;
-      color: #fff;
-      border-radius: 999px;
-      font-size: 14px;
-      display: inline-block;
+      background: linear-gradient(135deg, var(--accent), #4f46e5);
+      color: #0b1120;
+      font-weight: 600;
+      box-shadow: 0 0 24px rgba(56,189,248,0.7);
+      animation: glow-soft 3.4s ease-in-out infinite;
     }
 
     .btn-main:hover {
-      opacity: 0.8;
+      transform: translateY(-1px) scale(1.01);
+    }
+
+    .btn-ghost {
+      background: rgba(15,23,42,0.9);
+      color: var(--accent);
+      border-color: rgba(148,163,184,0.7);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15,23,42,1);
+      box-shadow: 0 0 18px rgba(148,163,184,0.5);
+      transform: translateY(-1px);
+    }
+
+    .hero-side {
+      padding: 18px 20px;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.24), rgba(15,23,42,0.96));
+      border: 1px solid rgba(148,163,184,0.7);
+      box-shadow: var(--shadow-glass);
+      animation: float-soft 6s ease-in-out infinite;
+    }
+
+    .hero-side-label {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .hero-side-main {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .hero-side-text {
+      font-size: 13px;
+      color: #e5e7eb;
+    }
+
+    /* 區塊標題 */
+    section {
+      margin-top: 34px;
     }
 
     section h2 {
-      font-size: 22px;
+      font-size: 20px;
       margin-bottom: 6px;
-      margin-top: 40px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    section h2::before {
+      content: "";
+      width: 6px;
+      height: 18px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--accent), #4f46e5);
     }
 
     .section-sub {
-      font-size: 14px;
-      opacity: 0.6;
+      font-size: 13px;
+      color: var(--text-muted);
       margin-bottom: 16px;
     }
 
     /* 關於我 */
     .about-box {
-      padding: 20px;
-      border-radius: 10px;
-      border: 1px solid #eee;
-      background: #fafafa;
-      font-size: 15px;
+      padding: 20px 22px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--glass-border);
+      background: rgba(15,23,42,0.88);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow-glass);
+      font-size: 14px;
     }
 
     /* 技能 */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
     }
 
     .skill-card {
       padding: 16px;
-      border-radius: 12px;
-      border: 1px solid #eee;
-      background: #fafafa;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--glass-border);
+      background: rgba(15,23,42,0.9);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 14px 40px rgba(15,23,42,0.8);
+      font-size: 13px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border 0.18s ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 48px rgba(15,23,42,0.95);
+      border-color: var(--accent-soft);
     }
 
     .skill-card h3 {
       margin-bottom: 8px;
       font-size: 15px;
       font-weight: 600;
+      color: var(--accent);
     }
 
     .skill-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 6px;
     }
 
     .skill-tag {
       padding: 4px 10px;
-      background: #fff;
-      border: 1px solid #ddd;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.7);
       border-radius: 999px;
-      font-size: 12px;
+      font-size: 11px;
+      color: #e5e7eb;
     }
 
     /* 作品展示 */
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
     }
 
     .card {
       padding: 16px;
-      border-radius: 12px;
-      border: 1px solid #eee;
-      background: #fafafa;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--glass-border);
+      background: rgba(15,23,42,0.9);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 16px 40px rgba(15,23,42,0.9);
+      font-size: 13px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 55px rgba(15,23,42,1);
     }
 
     .card-title {
@@ -180,64 +377,122 @@
     }
 
     .card-meta {
-      font-size: 12px;
-      opacity: 0.6;
+      font-size: 11px;
+      color: var(--text-muted);
       margin-bottom: 8px;
     }
 
-    /* 左下角 YouTube 音樂播放器 */
-    .music-player {
-      position: fixed;
-      left: 20px;
-      bottom: 20px;
-      background: #fff;
-      padding: 6px;
-      border-radius: 10px;
-      border: 1px solid #ddd;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 40px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(148,163,184,0.4);
     }
 
-    /* 右下角照片 */
+    /* 左下角 mp3 音樂播放器 */
+    .music-player {
+      position: fixed;
+      left: 18px;
+      bottom: 18px;
+      background: rgba(15,23,42,0.9);
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.8);
+      box-shadow: 0 16px 40px rgba(15,23,42,0.95);
+      backdrop-filter: blur(18px);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 30;
+      animation: fade-in-up 0.7s ease-out 0.2s both;
+    }
+
+    .music-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .music-player audio {
+      height: 28px;
+    }
+
+    /* 右下角照片（玻璃卡 + 圓角） */
     .photo-box {
       position: fixed;
-      right: 20px;
-      bottom: 20px;
+      right: 18px;
+      bottom: 18px;
       width: 120px;
       height: 120px;
-      border-radius: 12px;
+      border-radius: 24px;
       overflow: hidden;
-      border: 1px solid #ddd;
-      box-shadow: 0 0 10px rgba(0,0,0,0.08);
+      border: 1px solid rgba(148,163,184,0.8);
+      box-shadow: 0 18px 45px rgba(15,23,42,0.95);
+      backdrop-filter: blur(20px);
+      background: rgba(15,23,42,0.9);
+      z-index: 25;
+      animation: float-soft 7s ease-in-out infinite;
     }
 
     .photo-box img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      opacity: 0.96;
+      transition: transform 0.25s ease, opacity 0.25s ease;
     }
 
-    footer {
-      text-align: center;
-      font-size: 13px;
-      opacity: 0.6;
-      margin-top: 40px;
-      padding-top: 20px;
-      border-top: 1px solid #eee;
+    .photo-box:hover img {
+      transform: scale(1.06);
+      opacity: 1;
     }
 
-    @media(max-width: 768px) {
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        border-radius: 18px;
+      }
+
+      nav a {
+        margin-left: 0;
+        margin-right: 16px;
+      }
+
       .hero {
         grid-template-columns: 1fr;
+      }
+
+      .hero-side {
+        order: -1;
+      }
+
+      .page-shell {
+        padding: 20px 14px 120px;
+      }
+
+      .music-player {
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 14px;
+      }
+
+      .photo-box {
+        display: none; /* 手機先隱藏避免擋畫面，之後要顯示可以改回來 */
       }
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
+  <div class="page-shell">
 
+    <!-- 頂部導覽 -->
     <header>
-      <div class="logo">李家安</div>
+      <div class="logo">LI JIA AN</div>
       <nav>
         <a href="#about">關於我</a>
         <a href="#skills">技能</a>
@@ -245,10 +500,16 @@
       </nav>
     </header>
 
+    <!-- Hero 區塊 -->
     <section class="hero">
-      <div>
-        <div class="hero-title">嗨，我是李家安</div>
-        <p class="hero-sub">簡單的一句介紹：我提供睡覺、代睡。</p>
+      <div class="glass-card hero-main fade-in">
+        <div class="hero-title">
+          嗨，我是 <span>李家安</span>
+        </div>
+        <p class="hero-sub">
+          簡單的一句介紹：我提供睡覺、代睡服務，<br>
+          專長是把時間睡到最飽、人生過到最舒服。
+        </p>
 
         <div class="hero-tags">
           <div class="tag">吃飯</div>
@@ -256,61 +517,113 @@
           <div class="tag">打手槍</div>
         </div>
 
-        <a href="#contact" class="btn-main">聯絡我</a>
+        <div class="btn-row">
+          <a href="#about" class="btn-main">認識一下我 →</a>
+          <a href="#works" class="btn-ghost">看看生活 / 經歷</a>
+        </div>
       </div>
+
+      <aside class="hero-side fade-in fade-in-delay-1">
+        <div class="hero-side-label">PROFILE SNAPSHOT</div>
+        <div class="hero-side-main">「人生短短幾個秋，先睡飽再說。」</div>
+        <div class="hero-side-text">
+          長期鑽研吃飽睡、睡飽吃的生活哲學，擅長將耍廢提升到一種藝術形式。
+          目前持續精進中，目標是當一位專業的休息規劃顧問。
+        </div>
+      </aside>
     </section>
 
-    <section id="about">
+    <!-- 關於我 -->
+    <section id="about" class="fade-in fade-in-delay-1">
       <h2>關於我</h2>
-      <p class="section-sub">簡單介紹你的背景與故事。</p>
+      <p class="section-sub">用一點文字，讓人知道你在想什麼、過著怎樣的生活。</p>
       <div class="about-box">
-        我是 李家安，長期提供吃胖相關服務……
+        我是李家安，興趣是把日子過得輕鬆愉快。<br><br>
+        主要業務內容包含：認真吃飯、認真睡覺、偶爾打個遊戲。
+        偶爾也會幫朋友想一些廢到笑的點子，專長是讓大家的壓力指數下降。
+        <br><br>
+        如果你也覺得世界太吵太累，可以一起研究怎麼把生活調整到「剛剛好舒服」的狀態。
       </div>
     </section>
 
-    <section id="skills">
+    <!-- 技能專長 -->
+    <section id="skills" class="fade-in fade-in-delay-2">
       <h2>技能專長</h2>
-      <p class="section-sub">我能提供的服務內容。</p>
+      <p class="section-sub">雖然聽起來在耍廢，其實我還是有一些自豪的技能。</p>
+
       <div class="skills-grid">
         <div class="skill-card">
           <h3>吃飽睡 / 睡飽吃</h3>
           <div class="skill-tags">
             <span class="skill-tag">7777</span>
-            <span class="skill-tag">交接流程</span>
-            <span class="skill-tag">風險控管</span>
+            <span class="skill-tag">完美作息調整</span>
+            <span class="skill-tag">快速進入睡眠模式</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <h3>耍廢管理</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">時間分配術</span>
+            <span class="skill-tag">廢而不爛</span>
+            <span class="skill-tag">心情維護</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <h3>朋友 Support</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">聽你抱怨</span>
+            <span class="skill-tag">一起廢</span>
+            <span class="skill-tag">一起笑出來</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="works">
+    <!-- 作品 / 經歷 -->
+    <section id="works" class="fade-in fade-in-delay-3">
       <h2>作品 / 經歷</h2>
-      <p class="section-sub">你做過的事或成就。</p>
+      <p class="section-sub">不一定是正式工作，也可以是你覺得很酷、很有趣的事。</p>
+
       <div class="cards">
         <div class="card">
-          <div class="card-title">交易經驗</div>
-          <div class="card-meta">2022 - 至今</div>
-          <p>累積超過 XX 筆交易，提供穩定服務。</p>
+          <div class="card-title">睡眠研究實戰經驗</div>
+          <div class="card-meta">2020 - 至今｜床上 / 沙發 / 椅子</div>
+          <p>
+            實測各種睡姿、枕頭高度、被子厚度，累積無數小時的實戰經驗，
+            對「怎樣睡最爽」有自己的一套理論。
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">吃飽睡哲學推廣中</div>
+          <div class="card-meta">日常生活｜親友圈</div>
+          <p>
+            積極向身邊朋友推廣「先顧好自己再談理想」的理念，
+            鼓勵大家適度耍廢，保持身心平衡。
+          </p>
         </div>
       </div>
     </section>
 
-    <footer>© 2025 YOUR NAME</footer>
-
+    <footer>
+      © 2025 LI JIA AN · 玻璃風小小個人網站
+    </footer>
   </div>
 
-  <!-- 左下角 YouTube 音樂播放器 -->
+  <!-- 左下角 mp3 音樂播放器 -->
   <div class="music-player">
-    <iframe width="260" height="60"
-      src="1712.mp3"
-      frameborder="0"
-      allow="autoplay; encrypted-media">
-    </iframe>
+    <span class="music-label">🌙 BGM</span>
+    <audio controls>
+      <source src="1712.mp3" type="audio/mpeg">
+      無法播放音樂
+    </audio>
   </div>
 
   <!-- 右下角照片 -->
   <div class="photo-box">
-    <img src="1713.png" alt="Your Photo">
+    <img src="1713.png" alt="Me">
   </div>
 
 </body>
